@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>A La Charlotte | Boulangerie Artisanale à Coquelles</title>
+    <meta name="description" content="Maison A La Charlotte à Coquelles. Découvrez nos pains traditionnels, viennoiseries et pâtisseries fines. Fait maison chaque jour.">
+    <link rel="canonical" href="https://www.alacharlotte.fr">
+    
+    <!-- POLICES DE CARACTÈRES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@500;600;700&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- TAILWIND CSS & CONFIGURATION -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#D8A85F',
+                        terracotta: '#C76B4F',   
+                        accent: '#E7D3B3',       
+                        bgLight: '#FFF8f1',      
+                        bgSec: '#F5E9D8',        
+                        textMain: '#5E4330',     
+                        textDark: '#1F1F1F',
+                        textSec: '#5F5F5F',
+                        orangeAccent: '#E58B5B',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Poppins', 'sans-serif'],
+                        hand: ['Merienda', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* --- CONFIGURATION DES ANIMATIONS --- */
+        
+        /* Zoom arrière pour les images au survol de la carte */
+        .zoom-bg-effect {
+            transform: scale(1.15);
+            transition: transform 2500ms cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        
+        .img-card-zoom {
+            transform: scale(1.15);
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .group:hover .img-card-zoom {
+            transform: scale(1);
+        }
+
+        /* Animation des Cadres globaux : Passage de GRAND à PETIT au défilement */
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(1.08) translateY(15px);
+            transition: opacity 700ms cubic-bezier(0.34, 1.56, 0.64, 1), 
+                        transform 700ms cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        /* ANIMATION DE CONTRASTE & DÉROULEMENT MODERNE (Savoir-Faire) */
+        .modern-fade-reveal {
+            opacity: 0;
+            filter: blur(8px) contrast(0.5);
+            clip-path: inset(0 0 100% 0);
+            transition: opacity 1000ms cubic-bezier(0.25, 1, 0.5, 1),
+                        filter 1000ms cubic-bezier(0.25, 1, 0.5, 1),
+                        clip-path 1200ms cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .reveal-scale.active .modern-fade-reveal {
+            opacity: 1;
+            filter: blur(0) contrast(1);
+            clip-path: inset(0 0 0% 0);
+        }
+
+        /* Effet Machine à Écrire sur le titre principal */
+        #typewriter::after {
+            content: '|';
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Délais d'apparition en cascade */
+        .stagger-0 { transition-delay: 0ms; }
+        .stagger-1 { transition-delay: 100ms; }
+        .stagger-2 { transition-delay: 200ms; }
+        .stagger-3 { transition-delay: 300ms; }
+    </style>
+</head>
+<body class="bg-bgLight text-textMain font-sans antialiased overflow-x-hidden">
+
+    <!-- HEADER PREMIUM -->
+    <header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500">
+        <div class="max-w-7xl px-6 sm:px-8 h-24 flex items-center justify-between mx-auto transition-all duration-500" id="header-container">
+            <!-- LOGO ENCADRÉ POUR LE CONTRASTE ET LA LISIBILITÉ -->
+            <a href="#" id="header-logo" class="font-serif text-xl sm:text-2xl font-bold tracking-wide text-white transition-all duration-300 border border-primary/40 bg-textDark/40 px-4 py-1.5 rounded-xl backdrop-blur-sm hover:border-primary">
+                A La <span class="text-primary">Charlotte</span>
+            </a>
+            <nav id="header-nav" class="hidden md:flex space-x-10 text-xs font-semibold uppercase tracking-widest text-white/90 transition-colors duration-300">
+                <a href="#" class="hover:text-primary transition-colors">Accueil</a>
+                <a href="#produits" class="hover:text-primary transition-colors">Nos Collections</a>
+                <a href="#savoir-faire" class="hover:text-primary transition-colors">Savoir-Faire</a>
+                <a href="#avis" class="hover:text-primary transition-colors">Avis</a>
+                <a href="#contact" class="hover:text-primary transition-colors">Contact & Accès</a>
+            </nav>
+            <div class="hidden md:flex">
+                <a href="tel:0321365821" id="header-btn" class="bg-white hover:bg-primary text-textMain hover:text-white px-6 py-3 rounded-full font-sans text-xs uppercase tracking-widest font-semibold transition-all duration-300 shadow-md">
+                    03 21 36 58 21
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION HERO WITH TYPEWRITER -->
+    <section class="relative h-screen flex items-center justify-center bg-textDark overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center bg-fixed zoom-bg-effect" style="background-image: url('https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1600&auto=format&fit=crop');" id="hero-bg"></div>
+        <div class="absolute inset-0 bg-black/45 backdrop-blur-sm"></div>
+        
+        <div class="relative max-w-5xl mx-auto px-6 text-center text-white z-10 space-y-6 reveal-scale active">
+            <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight min-h-[4.5rem] sm:min-h-[6rem]" id="typewriter"></h1>
+            <p class="font-hand text-lg sm:text-2xl text-bgLight/95 font-semibold opacity-0 transition-opacity duration-500" id="hero-subtitle">
+                Chaque jour, nous préparons pains, viennoiseries et pâtisseries artisanales avec passion.
+            </p>
+            <div class="pt-4 opacity-0 transition-opacity duration-500" id="hero-button">
+                <a href="#produits" class="bg-textMain hover:bg-primary text-white px-8 py-4 rounded-full font-sans uppercase tracking-widest font-bold shadow-xl transition-transform duration-300 text-xs inline-block hover:scale-105">
+                    Découvrir nos créations
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION PRÉSENTATION -->
+    <section class="py-36 max-w-4xl mx-auto px-6 text-center reveal-scale">
+        <span class="text-primary uppercase tracking-widest text-xs font-bold font-sans block mb-3">Maison d'Excellence</span>
+        <h2 class="font-serif text-3xl sm:text-5xl text-textMain font-bold mb-6">Une Boulangerie Artisanale au Service de la Gourmandise</h2>
+        <p class="font-hand text-lg sm:text-xl text-orangeAccent font-semibold leading-relaxed">
+            Depuis de nombreuses années, A La Charlotte accompagne les habitants de Coquelles et des environs avec des produits artisanaux préparés quotidiennement.
+        </p>
+    </section>
+
+    <!-- SECTION COLLECTIONS PRODUITS -->
+    <section id="produits" class="py-36 bg-bgSec">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8">
+            <div class="text-center mb-24 reveal-scale">
+                <h2 class="font-serif text-3xl sm:text-5xl text-textMain font-bold">Nos Collections Gourmandes</h2>
+                <p class="font-hand text-base text-primary font-semibold mt-2">Sélectionnées au fil des saisons</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Carte 1 : Pains -->
+                <div class="group bg-bgLight rounded-[32px] p-5 shadow-lg border border-primary/10 transition-all duration-500 hover:shadow-2xl reveal-scale stagger-0">
+                    <div class="overflow-hidden rounded-[24px] p-1.5 bg-white border border-primary/40 shadow-inner h-60">
+                        <img loading="lazy" class="w-full h-full object-cover rounded-[18px] img-card-zoom" src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?q=80&w=400&auto=format&fit=crop" alt="Pains frais">
+                    </div>
+                    <div class="pt-6 text-center">
+                        <h3 class="font-serif text-xl font-bold text-textMain mb-3 transition-colors duration-300 group-hover:text-primary">Pains & Traditions</h3>
+                        <p class="font-hand text-xs text-textSec font-semibold min-h-[5rem] type-scroll" data-text="Nos baguettes de tradition et miches au levain naturel sont façonnées à la main et cuites quotidiennement sur pierre pour garantir une croûte croustillante et une mie alvéolée parfumée."></p>
+                    </div>
+                </div>
+
+                <!-- Carte 2 : Viennoiseries -->
+                <div class="group bg-bgLight rounded-[32px] p-5 shadow-lg border border-primary/10 transition-all duration-500 hover:shadow-2xl reveal-scale stagger-1">
+                    <div class="overflow-hidden rounded-[24px] p-1.5 bg-white border border-primary/40 shadow-inner h-60">
+                        <img loading="lazy" class="w-full h-full object-cover rounded-[18px] img-card-zoom" src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=400&auto=format&fit=crop" alt="Viennoiseries">
+                    </div>
+                    <div class="pt-6 text-center">
+                        <h3 class="font-serif text-xl font-bold text-textMain mb-3 transition-colors duration-300 group-hover:text-primary">Viennoiseries</h3>
+                        <p class="font-hand text-xs text-textSec font-semibold min-h-[5rem] type-scroll" data-text="Découvrez notre feuilletage d'exception au pur beurre. Nos croissants et pains au chocolat dorés offrent un croustillant aérien incomparable pour des petits-déjeuners gourmands."></p>
+                    </div>
+                </div>
+
+                <!-- Carte 3 : Pâtisseries -->
+                <div class="group bg-bgLight rounded-[32px] p-5 shadow-lg border border-primary/10 transition-all duration-500 hover:shadow-2xl reveal-scale stagger-2">
+                    <div class="overflow-hidden rounded-[24px] p-1.5 bg-white border border-primary/40 shadow-inner h-60">
+                        <img loading="lazy" class="w-full h-full object-cover rounded-[18px] img-card-zoom" src="https://images.unsplash.com/photo-1587314168485-3236d6710814?q=80&w=400&auto=format&fit=crop" alt="Pâtisserie fine">
+                    </div>
+                    <div class="pt-6 text-center">
+                        <h3 class="font-serif text-xl font-bold text-textMain mb-3 transition-colors duration-300 group-hover:text-primary">Pâtisserie Fine</h3>
+                        <p class="font-hand text-xs text-textSec font-semibold min-h-[5rem] type-scroll" data-text="Succombez à notre collection de douceurs sucrées. Des éclairs onctueux aux tartes délicates garnies de fruits frais sélectionnés, chaque pièce est une véritable invitation au plaisir."></p>
+                    </div>
+                </div>
+
+                <!-- Carte 4 : Créations Saisons -->
+                <div class="group bg-bgLight rounded-[32px] p-5 shadow-lg border border-primary/10 transition-all duration-500 hover:shadow-2xl reveal-scale stagger-3">
+                    <div class="overflow-hidden rounded-[24px] p-1.5 bg-white border border-primary/40 shadow-inner h-60">
+                        <img loading="lazy" class="w-full h-full object-cover rounded-[18px] img-card-zoom" src="https://images.unsplash.com/photo-1511018556340-d16986a1c194?q=80&w=400&auto=format&fit=crop" alt="Créations de saison">
+                    </div>
+                    <div class="pt-6 text-center">
+                        <h3 class="font-serif text-xl font-bold text-textMain mb-3 transition-colors duration-300 group-hover:text-primary">Créations Saison</h3>
+                        <p class="font-hand text-xs text-textSec font-semibold min-h-[5rem] type-scroll" data-text="Au rythme du calendrier, notre équipe imagine des douceurs éphémères uniques. Retrouvez nos galettes en janvier, nos bûches créatives et des spécialités fruitées toute l'année."></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION SAVOIR-FAIRE -->
+    <section id="savoir-faire" class="py-36 bg-bgLight">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-16 text-center">
+                
+                <div class="reveal-scale space-y-4">
+                    <div class="text-primary text-4xl transform transition-transform duration-300 hover:scale-125 inline-block">🥖</div>
+                    <h3 class="font-serif text-2xl font-bold text-textMain">Un Savoir-Faire Authentique</h3>
+                    <p class="font-hand text-sm text-textSec font-semibold leading-relaxed modern-fade-reveal" style="transition-delay: 200ms;">
+                        L'amour du métier guide chacun de nos gestes. Nous perpétuons avec fierté et rigueur les méthodes ancestrales de la boulangerie artisanale française, garantissant des textures idéales et un goût véritable à chaque fournée.
+                    </p>
+                </div>
+
+                <div class="reveal-scale space-y-4">
+                    <div class="text-primary text-4xl transform transition-transform duration-300 hover:scale-125 inline-block">🌾</div>
+                    <h3 class="font-serif text-2xl font-bold text-textMain">Ingrédients Sélectionnés</h3>
+                    <p class="font-hand text-sm text-textSec font-semibold leading-relaxed modern-fade-reveal" style="transition-delay: 400ms;">
+                        La qualité commence par le choix de la matière première. Nous collaborons étroitement avec des meuniers régionaux pour sélectionner des farines d'exception et des ingrédients nobles, garantissant des saveurs saines et naturelles.
+                    </p>
+                </div>
+
+                <div class="reveal-scale space-y-4">
+                    <div class="text-primary text-4xl transform transition-transform duration-300 hover:scale-125 inline-block">✨</div>
+                    <h3 class="font-serif text-2xl font-bold text-textMain">Préparé Chaque Jour</h3>
+                    <p class="font-hand text-sm text-textSec font-semibold leading-relaxed modern-fade-reveal" style="transition-delay: 600ms;">
+                        Chez nous, le mot frais prend tout son sens. Dès l'aube, notre équipe s'active au fournil pour pétrir, cuire et dresser l'ensemble de nos vitrines afin de vous offrir des produits chauds et succulents à toute heure.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION AVIS -->
+    <section id="avis" class="py-36 bg-bgSec">
+        <div class="max-w-4xl mx-auto px-6 text-center reveal-scale">
+            <h2 class="font-serif text-3xl sm:text-5xl text-textMain font-bold mb-4">La Confiance de nos Clients</h2>
+            <div class="bg-bgLight p-10 rounded-[32px] shadow-xl min-h-[200px] flex items-center justify-center">
+                <div id="carousel-item" class="transition-opacity duration-500"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER : INFORMATIONS COMPLETES -->
+    <footer id="contact" class="bg-textDark text-bgLight pt-24 pb-12 border-t-8 border-primary">
+        <div class="max-w-7xl mx-auto px-6 text-center sm:text-left grid grid-cols-1 lg:grid-cols-3 gap-16 pb-16 border-b border-white/10">
+            <div class="space-y-4">
+                <h3 class="font-serif text-3xl font-bold text-primary">A La Charlotte</h3>
+                <p class="font-hand text-sm text-accent/80">Boulangerie artisanale, Pâtisserie fine & Viennoiserie traditionnelle.</p>
+                <div class="text-xs space-y-2 text-bgLight/70 pt-2">
+                    <p>📍 <strong class="text-white">Adresse :</strong> 1 Rue Bonvarlet, 62231 Coquelles</p>
+                    <p>📞 <strong class="text-white">Téléphone :</strong> <a href="tel:0321365821" class="text-primary hover:underline">03 21 36 58 21</a></p>
+                </div>
+            </div>
+
+            <!-- SECTION DES HORAIRES MIS À JOUR -->
+            <div class="space-y-4">
+                <h4 class="font-serif text-xl font-semibold text-white tracking-wide">Horaires de l'Atelier</h4>
+                <ul class="space-y-2.5 text-xs text-bgLight/80 font-light">
+                    <li class="flex justify-between border-b border-white/5 pb-1.5">
+                        <span>Lun, Mar, Jeu, Ven, Sam</span> 
+                        <span class="font-medium text-primary text-right">06:30–13:00<br>15:00–19:30</span>
+                    </li>
+                    <li class="flex justify-between border-b border-white/5 pb-1.5">
+                        <span>Dimanche</span> 
+                        <span class="font-medium text-primary">06:30–13:00</span>
+                    </li>
+                    <li class="flex justify-between text-white/40">
+                        <span>Mercredi</span> 
+                        <span>Fermé</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="rounded-[24px] overflow-hidden h-48 bg-white/5 border border-white/10 shadow-inner">
+                <iframe class="w-full h-full border-0 opacity-80" src="https://maps.google.com/maps?q=1%20Rue%20Bonvarlet,%2062231%20Coquelles&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 mt-12 text-center text-[11px] uppercase tracking-widest text-bgLight/40">
+            <div>© 2026 A La Charlotte. Tous droits réservés.</div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVITÉ ET LOGIQUE DES SCRIPTS -->
+    <script>
+        // Effet Écriture Automatique (Titre principal)
+        const textTarget = "A La Charlotte, l’Art du Pain et de la Gourmandise à Coquelles";
+        let characterIndex = 0;
+        const typewriterElement = document.getElementById('typewriter');
+
+        function typeWriterEffect() {
+            if (characterIndex < textTarget.length) {
+                typewriterElement.innerHTML += textTarget.charAt(characterIndex);
+                characterIndex++;
+                setTimeout(typeWriterEffect, 35); 
+            } else {
+                const subtitle = document.getElementById('hero-subtitle');
+                const button = document.getElementById('hero-button');
+                subtitle.classList.remove('opacity-0');
+                setTimeout(() => { button.classList.remove('opacity-0'); }, 200);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const bg = document.getElementById('hero-bg');
+            if(bg) setTimeout(() => { bg.style.transform = "scale(1)"; }, 100);
+            typeWriterEffect();
+        });
+
+        // Fonction d'écriture avec une vitesse légèrement ralentie
+        function typeScrollEffect(element) {
+            if (element.classList.contains('typed-done')) return;
+            element.classList.add('typed-done');
+            
+            const rawText = element.getAttribute('data-text');
+            let idx = 0;
+            element.innerHTML = "";
+            
+            function write() {
+                if (idx < rawText.length) {
+                    element.innerHTML += rawText.charAt(idx);
+                    idx++;
+                    setTimeout(write, 25); 
+                }
+            }
+            write();
+        }
+
+        // Intersection Observer global
+        const itemsToReveal = document.querySelectorAll('.reveal-scale');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    
+                    const textsToType = entry.target.querySelectorAll('.type-scroll');
+                    textsToType.forEach(txt => {
+                        setTimeout(() => { typeScrollEffect(txt); }, 300);
+                    });
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+        itemsToReveal.forEach(item => observer.observe(item));
+
+        // Carrousel des avis
+        const reviews = [
+            { text: "“Excellente boulangerie, les produits sont délicieux et le pain est très bon.”", author: "— Avis Client Google", stars: "★★★★★" },
+            { text: "“Les galettes du jour sont excellentes.”", author: "— Avis Client Google", stars: "★★★★★" }
+        ];
+        let reviewIdx = 0;
+        const box = document.getElementById('carousel-item');
+        function displayReview() {
+            if(!box) return;
+            box.style.opacity = '0';
+            setTimeout(() => {
+                const r = reviews[reviewIdx];
+                box.innerHTML = `
+                    <p class="text-primary text-sm mb-2">${r.stars}</p>
+                    <blockquote class="font-serif italic text-textMain max-w-2xl mx-auto mb-2">${r.text}</blockquote>
+                    <cite class="font-hand text-xs text-orangeAccent not-italic font-semibold">${r.author}</cite>
+                `;
+                box.style.opacity = '1';
+                reviewIdx = (reviewIdx + 1) % reviews.length;
+            }, 300);
+        }
+        displayReview();
+        setInterval(displayReview, 4500);
+    </script>
+</body>
+</html>
